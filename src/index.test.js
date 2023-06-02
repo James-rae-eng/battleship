@@ -1,28 +1,27 @@
 /* eslint-disable */
 
-const formulas = require('./index');
+// Testing ship function
+const index = require('./index');
 
-test('adds 1 + 2 to equal 3', () => {
-  expect(formulas.sum(1, 2)).toBe(3);
+test('create ship object with properties: length, and return the length', () => {
+  expect(index.shipFactory(2).length).toBe(2);
 });
 
-test('Capitalize string', () => {
-  expect(formulas.capitalize('hello')).toMatch('Hello');
+test('when ship hit function is called, increase hit number', () => {
+    const ship = index.shipFactory(1);
+    ship.hit();
+    expect(ship.hits).toBe(1);
 });
 
-test('Reverse a string', () => {
-  expect(formulas.reverseString('hello')).toMatch('olleh');
+test('when ship isSunk function is called, is not sunk if hits < length', () => {
+    const ship = index.shipFactory(3);
+    ship.hit();
+    expect(ship.isSunk()).toBeFalsy();
 });
 
-test('Reverse a string', () => {
-  expect(formulas.subtract(5, 3)).toBe(2);
-});
-
-test('take array of numbers and return; avg, min, max & length', () => {
-  expect(formulas.analyzeArray([1, 4, 7, 3, 9, 13, 5])).toEqual({
-    average: 6,
-    min: 1,
-    max: 13,
-    length: 7,
-  });
+test('when ship isSunk function is called, is sunk if hits = length', () => {
+    const ship = index.shipFactory(2);
+    ship.hit();
+    ship.hit();
+    expect(ship.isSunk()).toBeTruthy();
 });

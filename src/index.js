@@ -13,11 +13,6 @@ function capitalize(string) {
   return result;
 }
 
-function reverseString(string) {
-  const result = string.split('').reverse().join('');
-  return result;
-}
-
 function analyzeArray(array) {
   const { length } = array;
   const sumTotal = array.reduce((a, b) => a + b, 0);
@@ -29,6 +24,24 @@ function analyzeArray(array) {
   };
 }
 
+function shipFactory(length) {
+  const ship = {
+    length,
+    hits: 0,
+    sunk: false,
+    hit() {
+      this.hits += 1;
+    },
+    isSunk() {
+      if (this.hits === length) {
+        this.sunk = true;
+      }
+      return this.sunk;
+    },
+  };
+  return ship;
+}
+
 module.exports = {
-  sum, subtract, capitalize, reverseString, analyzeArray,
+  sum, subtract, capitalize, analyzeArray, shipFactory,
 };
